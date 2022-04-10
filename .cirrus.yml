@@ -6,7 +6,7 @@ env:
   CIRRUS_SHELL: powershell
 
 task:
-  debug_try_stop_host_network_service: |
+  debug_try_stop_host_network_service_script: |
     Stop-Service hns
     del C:\ProgramData\Microsoft\Windows\HNS\HNS.dat
     Start-Service hns
