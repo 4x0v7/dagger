@@ -6,6 +6,10 @@ env:
   CIRRUS_SHELL: powershell
 
 task:
+  debug_try_stop_host_network_service: |
+    Stop-Service hns
+    del C:\ProgramData\Microsoft\Windows\HNS\HNS.dat
+    Start-Service hns
   download_docker_daemon_script: |
     (New-Object System.Net.WebClient).DownloadFile('https://download.docker.com/win/static/stable/x86_64/docker-20.10.14.zip','docker.zip')
     Expand-Archive docker.zip -DestinationPath $Env:ProgramFiles
