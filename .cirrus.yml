@@ -13,7 +13,8 @@ docker_builder:
     docker version
     docker info
   install_scoop_base_scoop_script: |
-    Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+    Invoke-WebRequest -UseBasicParsing 'get.scoop.sh' -OutFile 'Install-Scoop.ps1'
+    .\Install-Scoop.ps1 -RunAsAdmin
     scoop which scoop
     scoop install 7zip git
     scoop config SCOOP_REPO 'https://github.com/Ash258/Scoop-Core'
