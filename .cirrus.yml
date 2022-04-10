@@ -1,0 +1,22 @@
+windows_container:
+  image: cirrusci/windowsservercore:2019
+
+env:
+  DAGGER_VERSION: 0.2.5
+
+task:
+  echo_docker_debug_info_script:
+    docker version
+    docker info
+  install_scoop_base_scoop_script: |
+    Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+    scoop which scoop
+    scoop install 7zip git
+    scoop config SCOOP_REPO 'https://github.com/Ash258/Scoop-Core'
+    scoop update
+    scoop status
+    scoop checkup
+  scoop_install_dagger_script: |
+    scoop install dagger@${env:DAGGER_VERSION}
+  dagger_do_lint_script:
+    dagger do lint
