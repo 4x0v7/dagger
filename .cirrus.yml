@@ -12,6 +12,8 @@ docker_builder:
   echo_docker_debug_info_script: |
     docker version
     docker info
+  search_dockercli_exe_script: |
+    Get-ChildItem -Path C:\ -Recurse -Include "DockerCli.exe"
   install_scoop_base_scoop_then_dagger_then_dagger_do_script: |
     Invoke-WebRequest -UseBasicParsing 'get.scoop.sh' -OutFile 'Install-Scoop.ps1'
     .\Install-Scoop.ps1 -RunAsAdmin
