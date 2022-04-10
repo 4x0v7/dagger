@@ -3,9 +3,16 @@ windows_container:
 
 env:
   DAGGER_VERSION: 0.2.5
+  CIRRUS_SHELL: powershell
 
 task:
-  echo_docker_debug_info_script:
+  download_docker_daemon_script: |
+    (New-Object System.Net.WebClient).DownloadFile('https://download.docker.com/win/static/stable/x86_64/docker-20.10.14.zip','docker.zip')
+    Expand-Archive docker.zip -DestinationPath $Env:ProgramFiles
+  register_and_start_docker_daemon_script: |
+    &$Env:ProgramFiles\Docker\dockerd --register-service
+    Start-Service docker
+  echo_docker_debug_info_script: |
     docker version
     docker info
   install_scoop_base_scoop_script: |
@@ -18,5 +25,5 @@ task:
     scoop checkup
   scoop_install_dagger_script: |
     scoop install dagger@${env:DAGGER_VERSION}
-  dagger_do_lint_script:
+  dagger_do_lint_script: |
     dagger do lint
