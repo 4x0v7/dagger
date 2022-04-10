@@ -25,7 +25,7 @@ docker_builder:
     scoop checkup
     scoop install dagger@${env:DAGGER_VERSION}
     scoop which dagger
-    ~\scoop\apps\dagger\current\dagger.exe project version
+    ~\scoop\apps\dagger\current\dagger.exe version
     ~\scoop\apps\dagger\current\dagger.exe project init
     ~\scoop\apps\dagger\current\dagger.exe project update
     ~\scoop\apps\dagger\current\dagger.exe do lint
