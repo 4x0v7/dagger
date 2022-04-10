@@ -12,7 +12,7 @@ docker_builder:
   echo_docker_debug_info_script: |
     docker version
     docker info
-  install_scoop_base_scoop_script: |
+  install_scoop_base_scoop_then_dagger_then_dagger_do_script: |
     Invoke-WebRequest -UseBasicParsing 'get.scoop.sh' -OutFile 'Install-Scoop.ps1'
     .\Install-Scoop.ps1 -RunAsAdmin
     scoop which scoop
@@ -20,8 +20,8 @@ docker_builder:
     scoop config SCOOP_REPO 'https://github.com/Ash258/Scoop-Core'
     scoop update
     scoop status
+    scoop update '*'
+    scoop status
     scoop checkup
-  scoop_install_dagger_script: |
     scoop install dagger@${env:DAGGER_VERSION}
-  dagger_do_lint_script: |
     dagger do lint
